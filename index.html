@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vice City Neon — Countdown Lock Screen Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&family=Orbitron:wght@700;900&family=Yellowtail&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="badge-neon">VICE CITY HUD</span>
+      <h1>Countdown Lock Screen Studio</h1>
+    </div>
+    <div class="top-actions">
+      <a href="#gallery" class="btn-ghost">Pre-Built Gallery</a>
+      <a href="#automation" class="btn-ghost">iOS / Samsung Auto-Sync</a>
+      <button id="exportBtn" class="btn-primary">Export Lock Screen PNG</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="controls-panel">
+      <div class="card">
+        <h2>1. Theme & Preset</h2>
+        <label>Preset Event</label>
+        <div class="pill-group" id="presetGroup">
+          <button class="pill active" data-preset="thanksgiving">Thanksgiving</button>
+          <button class="pill" data-preset="phoenix">Project Phoenix</button>
+          <button class="pill" data-preset="launch">Project Launch</button>
+        </div>
+
+        <label style="margin-top:14px;">GTA Style Direction</label>
+        <select id="themeSelect">
+          <option value="vice" selected>1. Vice City Neon (Pink / Cyan / Sunset Glow)</option>
+          <option value="sanandreas">2. San Andreas Street (Green / Gold / Street Grit)</option>
+          <option value="lossantos">3. Los Santos Luxe (Midnight / Electric Blue / Chrome)</option>
+        </select>
+
+        <label style="margin-top:14px;">Custom Background Image (Optional)</label>
+        <input type="file" id="bgUpload" accept="image/*" />
+      </div>
+
+      <div class="card">
+        <h2>2. Event & Device Details</h2>
+        <div class="grid-2">
+          <div>
+            <label>Top Header Tag</label>
+            <input type="text" id="tagInput" value="MISSION:" />
+          </div>
+          <div>
+            <label>HUD Counter Label</label>
+            <input type="text" id="hudLabelInput" value="FEAST IN" />
+          </div>
+        </div>
+
+        <label>Event / Goal Title</label>
+        <input type="text" id="titleInput" value="Thanksgiving Gathering" />
+
+        <div class="grid-2">
+          <div>
+            <label>Target Date</label>
+            <input type="date" id="dateInput" value="2026-11-26" />
+          </div>
+          <div>
+            <label>Countdown Format</label>
+            <select id="formatSelect">
+              <option value="days" selected>Days Only (Clean Daily)</option>
+              <option value="dhm">DD : HH : MM Snapshot</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <label>Target Device Resolution</label>
+            <select id="deviceSelect">
+              <option value="iphone" selected>iPhone Pro Max (1290×2796)</option>
+              <option value="samsung">Samsung Ultra (1440×3120)</option>
+            </select>
+          </div>
+          <div class="toggle-wrap">
+            <label>Safe-Zone Guides</label>
+            <label class="switch-label">
+              <input type="checkbox" id="safeZoneToggle" />
+              <span>Show Clock &amp; Sensor Zones</span>
+            </label>
+          </div>
+        </div>
+
+        <label>Bottom Motivational Caption</label>
+        <input type="text" id="captionInput" value="Plan • Prep • Host • Feast" />
+      </div>
+
+      <div class="card">
+        <div class="row-between">
+          <h2>3. Working-Backward Milestones</h2>
+          <button id="regenMilestonesBtn" class="btn-mini">Auto-Generate</button>
+        </div>
+        <div id="milestonesContainer" class="milestones-inputs"></div>
+      </div>
+    </section>
+
+    <section class="preview-panel">
+      <div class="phone-frame">
+        <canvas id="lockCanvas" width="1290" height="2796"></canvas>
+      </div>
+      <p class="preview-hint">Live Canvas Preview — Safe-zone guides are automatically hidden on PNG export.</p>
+    </section>
+  </main>
+
+  <section id="gallery" class="gallery-section">
+    <div class="section-head">
+      <h2>Pre-Rendered Vice City Neon Builds</h2>
+      <p>Ready-to-save 9:16 OLED lock screens plus the Blank Dynamic HUD wallpaper for daily automation.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="assets/thanksgiving-gathering.jpg" alt="Thanksgiving Gathering Lock Screen" />
+        <div class="gallery-meta">
+          <h3>Thanksgiving Gathering</h3>
+          <a href="assets/thanksgiving-gathering.jpg" download="ViceCity-Thanksgiving-LockScreen.jpg" class="btn-mini">Download JPG</a>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="assets/project-phoenix.jpg" alt="Mission Project Phoenix Lock Screen" />
+        <div class="gallery-meta">
+          <h3>Mission: Project Phoenix</h3>
+          <a href="assets/project-phoenix.jpg" download="ViceCity-ProjectPhoenix-LockScreen.jpg" class="btn-mini">Download JPG</a>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="assets/project-launch.jpg" alt="Project Launch Lock Screen" />
+        <div class="gallery-meta">
+          <h3>Project Launch Deadline</h3>
+          <a href="assets/project-launch.jpg" download="ViceCity-ProjectLaunch-LockScreen.jpg" class="btn-mini">Download JPG</a>
+        </div>
+      </div>
+      <div class="gallery-card">
+        <img src="assets/blank-hud-base.jpg" alt="Blank Vice City HUD Base" />
+        <div class="gallery-meta">
+          <h3>Blank Dynamic HUD Base</h3>
+          <a href="assets/blank-hud-base.jpg" download="ViceCity-Blank-HUD-Base.jpg" class="btn-mini">Download Base</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="automation" class="automation-section">
+    <div class="section-head">
+      <h2>Hands-Free Daily Phone Automation</h2>
+      <p>Pair the <strong>Blank Dynamic HUD Base</strong> above with native iOS Shortcuts or Samsung Good Lock.</p>
+    </div>
+    <div class="auto-grid">
+      <div class="card">
+        <h3>iPhone (iOS Shortcuts @ 12:01 AM)</h3>
+        <ol>
+          <li>Save <code>ViceCity-Blank-HUD-Base.jpg</code> into an album named <strong>ViceHUD</strong>.</li>
+          <li>In <strong>Shortcuts</strong>, calculate <em>Get Time Between Current Date and Target Date in Days</em>, then <em>Round Up</em>.</li>
+          <li>Use <strong>Find Photos</strong> (Album is <code>ViceHUD</code>) &rarr; <strong>Overlay Text</strong> centered inside the neon box &rarr; <strong>Set Wallpaper Photo</strong> (Preview Off).</li>
+          <li>Trigger daily at <strong>12:01 AM</strong> under the <strong>Automation</strong> tab.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Samsung Galaxy (LockStar + KWGT)</h3>
+        <ol>
+          <li>Apply <code>ViceCity-Blank-HUD-Base.jpg</code> as your One UI Lock Screen wallpaper.</li>
+          <li>Open <strong>Good Lock &rarr; LockStar</strong> and place a transparent <strong>4×2 KWGT widget</strong> inside the neon HUD frame (above the fingerprint sensor).</li>
+          <li>Use KWGT formula: <code>$tf(2026y11M26d0h0m, D)$ DAYS</code> in bold white with a cyan outer glow.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
